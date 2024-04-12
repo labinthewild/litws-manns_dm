@@ -98,7 +98,8 @@ module.exports = (function(exports) {
 	}
 
 	function getExpectationQuestions() {
-		let numQ = 6;
+		let questionOrderArray = randomizeArray(createArray());
+		let numQ = 28;
 		let numA = 6;
 		let quest = {
 			questions: [],
@@ -109,7 +110,7 @@ module.exports = (function(exports) {
 			if (counter <= numQ) {
 				quest.questions.push({
 					id: counter,
-					text: $.i18n(`study-mann-q${counter}`)
+					text: $.i18n(`study-mann-q${questionOrderArray[counter - 1]}`)
 				})
 			}
 			if (counter <= numA) {
@@ -122,6 +123,24 @@ module.exports = (function(exports) {
 		}
 		return quest;
 	}
+
+	function createArray() {
+		let array = [];
+		for (let index = 1; index < 29; index++) {
+			array.push(index);
+		}
+		return array;
+	}
+
+	function randomizeArray(array) {
+    for (let index = array.length - 1; index > 0; index--) {
+        let index2 = Math.floor(Math.random() * (index + 1));
+        let temp = array[index];
+        array[index] = array[index2];
+        array[index2] = temp;
+    }
+		return array;
+}
 
 	function calculateResults() {
 		//TODO: Nothing to calculate
