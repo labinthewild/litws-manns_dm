@@ -132,5 +132,11 @@
   "study-mann-q25": "I think that I am a good decision maker.",
   "study-mann-q26": "I feel so discouraged that I give up trying to make decisions.",
   "study-mann-q27": "The decisions I make turn out well.",
-  "study-mann-q28": "It is easy for other people to convince me that their decision rather than mine is the correct one."
+  "study-mann-q28": "It is easy for other people to convince me that their decision rather than mine is the correct one.",
+  "study-mann-r1": "1 (Strongly Disagree)",
+  "study-mann-r2": "2 (Moderately Disagree)",
+  "study-mann-r3": "3 (Slightly Disagree)",
+  "study-mann-r4": "4 (Slightly Agree)",
+  "study-mann-r5": "5 (Moderately Agree)",
+  "study-mann-r6": "6 (Strongly Agree)"
 }

@@ -58,9 +58,10 @@ module.exports = (function(exports) {
 				}
 			},*/
 			QUESTION1: {
-				name: "question_behavior",
+				name: "question_norms",
 				type: "display-slide",
 				template: question1Template,
+				template_data: getExpectationQuestions,
 				display_element: $("#question1"),
 				display_next_button: false,
 			},/*
@@ -94,6 +95,32 @@ module.exports = (function(exports) {
 		timeline.push(params.slides.QUESTION1);
 		/*timeline.push(params.slides.COMMENTS);
 		timeline.push(params.slides.RESULTS);*/
+	}
+
+	function getExpectationQuestions() {
+		let numQ = 6;
+		let numA = 6;
+		let quest = {
+			questions: [],
+			responses: []
+		}
+		let counter = 1;
+		while(counter <= Math.max(numQ, numA)) {
+			if (counter <= numQ) {
+				quest.questions.push({
+					id: counter,
+					text: $.i18n(`study-mann-q${counter}`)
+				})
+			}
+			if (counter <= numA) {
+				quest.responses.push({
+					id: counter,
+					text: $.i18n(`study-mann-r${counter}`)
+				})
+			}
+			counter++;
+		}
+		return quest;
 	}
 
 	function calculateResults() {
