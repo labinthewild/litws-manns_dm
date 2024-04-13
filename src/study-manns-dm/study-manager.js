@@ -64,7 +64,7 @@ module.exports = (function(exports) {
 				template_data: getExpectationQuestions,
 				display_element: $("#question1"),
 				display_next_button: false,
-			},/*
+			},
 			COMMENTS: {
 				type: "display-slide",
 				template: commentsTemplate,
@@ -84,7 +84,7 @@ module.exports = (function(exports) {
 				func: function(){
 					calculateResults();
 				}
-			}*/
+			}
 		}
 	};
 
@@ -93,8 +93,8 @@ module.exports = (function(exports) {
 		timeline.push(params.slides.INFORMED_CONSENT);
 		timeline.push(params.slides.DEMOGRAPHICS);*/
 		timeline.push(params.slides.QUESTION1);
-		/*timeline.push(params.slides.COMMENTS);
-		timeline.push(params.slides.RESULTS);*/
+		timeline.push(params.slides.COMMENTS);
+		timeline.push(params.slides.RESULTS);
 	}
 
 	function getExpectationQuestions() {

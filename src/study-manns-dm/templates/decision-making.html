@@ -23,13 +23,16 @@
 
         <div id="submit" class="row mt-4 invisible">
             <button id="button-save" type="button" class="btn btn-primary" data-bs-toggle="button"
-                    data-i18n="study-tl-q2-save" onclick="finishNormsQuest()"></button>
+                    data-i18n="study-mann-save" onclick="finishNormsQuest()"></button>
         </div>
 
     </div>
 </div>
 
 <script type="text/javascript">
+    let questionsNorms = {};
+    let numNormQuestions = document.querySelectorAll('[data-type="question"]').length;
+
     let respondNormsQuestion = function(qID, rID) {
         selectNormsResponse(qID, rID);
         questionsNorms[qID] = rID;
@@ -51,15 +54,12 @@
 
     let finishNormsQuest = function() {
         let quest_norms = {
-                country: selectedCountry,
                 responses: questionsNorms
             };
         LITW.study.params.norms_q_results = quest_norms;
         LITW.data.submitStudyData({
             quest_norms: quest_norms
         });
-        //TODO: Create a new UTIL call that calls this click (and maybe more)!
-        //EXPL: We currently use the "showNextButton(fn) in our slide processor, which should NOT be overwritten!
         document.getElementById('btn-next-page').click()
     }
 </script>
