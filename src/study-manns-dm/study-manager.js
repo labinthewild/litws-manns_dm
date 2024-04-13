@@ -29,6 +29,7 @@ require("../js/litw/jspsych-display-slide");
 module.exports = (function(exports) {
 	var timeline = [],
 	params = {
+		questionOrderArray: [],
 		study_id: "TO_BE_ADDED_IF_USING_LITW_INFRA",
 		study_recommendation: [],
 		preLoad: ["../img/btn-next.png","../img/btn-next-active.png","../img/ajax-loader.gif"],
@@ -65,6 +66,30 @@ module.exports = (function(exports) {
 				display_element: $("#question1"),
 				display_next_button: false,
 			},
+			QUESTION2: {
+				name: "question_norms",
+				type: "display-slide",
+				template: question1Template,
+				template_data: getExpectationQuestions,
+				display_element: $("#question1"),
+				display_next_button: false,
+			},
+			QUESTION3: {
+				name: "question_norms",
+				type: "display-slide",
+				template: question1Template,
+				template_data: getExpectationQuestions,
+				display_element: $("#question1"),
+				display_next_button: false,
+			},
+			QUESTION4: {
+				name: "question_norms",
+				type: "display-slide",
+				template: question1Template,
+				template_data: getExpectationQuestions,
+				display_element: $("#question1"),
+				display_next_button: false,
+			},
 			COMMENTS: {
 				type: "display-slide",
 				template: commentsTemplate,
@@ -93,13 +118,15 @@ module.exports = (function(exports) {
 		timeline.push(params.slides.INFORMED_CONSENT);
 		timeline.push(params.slides.DEMOGRAPHICS);*/
 		timeline.push(params.slides.QUESTION1);
+		timeline.push(params.slides.QUESTION2);
+		timeline.push(params.slides.QUESTION3);
+		timeline.push(params.slides.QUESTION4);
 		timeline.push(params.slides.COMMENTS);
 		timeline.push(params.slides.RESULTS);
 	}
 
 	function getExpectationQuestions() {
-		let questionOrderArray = randomizeArray(createArray());
-		let numQ = 28;
+		let numQ = 7;
 		let numA = 6;
 		let quest = {
 			questions: [],
@@ -110,7 +137,7 @@ module.exports = (function(exports) {
 			if (counter <= numQ) {
 				quest.questions.push({
 					id: counter,
-					text: $.i18n(`study-mann-q${questionOrderArray[counter - 1]}`)
+					text: $.i18n(`study-mann-q${params.questionOrderArray[counter - 1]}`)
 				})
 			}
 			if (counter <= numA) {
@@ -121,6 +148,7 @@ module.exports = (function(exports) {
 			}
 			counter++;
 		}
+		params.questionOrderArray.splice(0, 7);
 		return quest;
 	}
 
@@ -140,7 +168,7 @@ module.exports = (function(exports) {
         array[index2] = temp;
     }
 		return array;
-}
+	}
 
 	function calculateResults() {
 		//TODO: Nothing to calculate
@@ -197,6 +225,7 @@ module.exports = (function(exports) {
 		jsPsych.init({
 		  timeline: timeline
 		});
+		params.questionOrderArray = randomizeArray(createArray());
 	}
 
 	function startExperiment(){
