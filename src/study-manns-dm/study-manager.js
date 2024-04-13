@@ -210,6 +210,7 @@ module.exports = (function(exports) {
 	}
 
 	function startStudy() {
+		params.questionOrderArray = randomizeArray(createArray());
 		// generate unique participant id and geolocate participant
 		LITW.data.initialize();
 		// save URL params
@@ -225,7 +226,6 @@ module.exports = (function(exports) {
 		jsPsych.init({
 		  timeline: timeline
 		});
-		params.questionOrderArray = randomizeArray(createArray());
 	}
 
 	function startExperiment(){
