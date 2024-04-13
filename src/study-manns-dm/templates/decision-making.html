@@ -12,7 +12,7 @@
             <div class="col d-flex justify-content-center">
                 <div class="btn-group me-2" role="group" aria-label="First group">
     {{#each ../responses}}
-                    <button type="button" data-qid="{{ ../this.id }}" data-rid="{{ this.id }}" class="btn btn-outline-primary">
+                    <button type="button" data-qid="{{ ../this.id }}" data-rid="{{ this.id }}" class="btn btn-outline-primary" onclick="respondNormsQuestion({{ ../this.id }}, {{ this.id }})">
                         {{ this.text }}
                     </button>
     {{/each}}
@@ -30,5 +30,36 @@
 </div>
 
 <script type="text/javascript">
+    let respondNormsQuestion = function(qID, rID) {
+        selectNormsResponse(qID, rID);
+        questionsNorms[qID] = rID;
+        if(Object.keys(questionsNorms).length === numNormQuestions) {
+            document.getElementById('submit').classList.remove('invisible');
+        }
+    }
 
+    let selectNormsResponse = function(qID, rID) {
+        document.querySelectorAll(`[data-qid='${qID}']`).forEach(btn => {
+            if(btn.dataset.rid == rID && !btn.classList.contains('active')) {
+                bootstrap.Button.getOrCreateInstance(btn).toggle();
+            }
+            if(btn.dataset.rid != rID && btn.classList.contains('active')) {
+                bootstrap.Button.getOrCreateInstance(btn).toggle();
+            }
+        })
+    }
+
+    let finishNormsQuest = function() {
+        let quest_norms = {
+                country: selectedCountry,
+                responses: questionsNorms
+            };
+        LITW.study.params.norms_q_results = quest_norms;
+        LITW.data.submitStudyData({
+            quest_norms: quest_norms
+        });
+        //TODO: Create a new UTIL call that calls this click (and maybe more)!
+        //EXPL: We currently use the "showNextButton(fn) in our slide processor, which should NOT be overwritten!
+        document.getElementById('btn-next-page').click()
+    }
 </script>
