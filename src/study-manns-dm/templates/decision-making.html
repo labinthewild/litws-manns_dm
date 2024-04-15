@@ -43,6 +43,8 @@
     LITW.study.params.numNormQuestions = document.querySelectorAll('[data-type="question"]').length;
 
     $(document).ready(function() {
+        LITW.study.params.questionsNorms = {};
+        document.getElementById('submit').classList.add('invisible');
         let elem = document.getElementById("bar");
         elem.style.width = LITW.study.params.progressBarWidth + "%";
         console.log(elem.style.width);
