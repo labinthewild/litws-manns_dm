@@ -1,3 +1,7 @@
+<div id="progress-bar" style="width: 100%; background-color: grey; margin-bottom: 20px">
+    <div id="bar" style="width: 0%; height: 30px; background-color: green;"></div>
+</div>
+
 <div id="question-box" class="instructions-stim-container">
 
     <div id="questionnaire">
@@ -30,18 +34,24 @@
 </div>
 
 <script type="text/javascript">
-    let questionsNorms = {};
-    let numNormQuestions = document.querySelectorAll('[data-type="question"]').length;
+    LITW.study.params.numNormQuestions = document.querySelectorAll('[data-type="question"]').length;
 
-    let respondNormsQuestion = function(qID, rID) {
+    $(document).ready(function() {
+        let elem = document.getElementById("bar");
+        elem.style.width = LITW.study.params.progressBarWidth + "%";
+        console.log(elem.style.width);
+    });
+
+
+    function respondNormsQuestion (qID, rID) {
         selectNormsResponse(qID, rID);
-        questionsNorms[qID] = rID;
-        if(Object.keys(questionsNorms).length === numNormQuestions) {
+        LITW.study.params.questionsNorms[qID] = rID;
+        if(Object.keys(LITW.study.params.questionsNorms).length === LITW.study.params.numNormQuestions) {
             document.getElementById('submit').classList.remove('invisible');
         }
     }
 
-    let selectNormsResponse = function(qID, rID) {
+    function selectNormsResponse (qID, rID) {
         document.querySelectorAll(`[data-qid='${qID}']`).forEach(btn => {
             if(btn.dataset.rid == rID && !btn.classList.contains('active')) {
                 bootstrap.Button.getOrCreateInstance(btn).toggle();
@@ -52,9 +62,9 @@
         })
     }
 
-    let finishNormsQuest = function() {
+    function finishNormsQuest () {
         let quest_norms = {
-                responses: questionsNorms
+                responses: LITW.study.params.questionsNorms
             };
         LITW.study.params.norms_q_results = quest_norms;
         LITW.data.submitStudyData({
@@ -62,4 +72,5 @@
         });
         document.getElementById('btn-next-page').click()
     }
+
 </script>

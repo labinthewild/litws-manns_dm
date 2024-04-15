@@ -29,6 +29,9 @@ require("../js/litw/jspsych-display-slide");
 module.exports = (function(exports) {
 	var timeline = [],
 	params = {
+		questionsNorms: {},
+		progressBarWidth: -25,
+		numNormQuestions: 0,
 		questionOrderArray: [],
 		study_id: "TO_BE_ADDED_IF_USING_LITW_INFRA",
 		study_recommendation: [],
@@ -148,6 +151,7 @@ module.exports = (function(exports) {
 			}
 			counter++;
 		}
+		params.progressBarWidth = params.progressBarWidth + 25;
 		params.questionOrderArray.splice(0, 7);
 		return quest;
 	}
