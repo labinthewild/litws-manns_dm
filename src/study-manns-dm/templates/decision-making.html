@@ -43,7 +43,6 @@
     LITW.study.params.numNormQuestions = document.querySelectorAll('[data-type="question"]').length;
 
     $(document).ready(function() {
-        LITW.study.params.questionsNorms = {};
         document.getElementById('submit').classList.add('invisible');
         let elem = document.getElementById("bar");
         elem.style.width = LITW.study.params.progressBarWidth + "%";
@@ -54,7 +53,7 @@
     function respondNormsQuestion (qID, rID) {
         selectNormsResponse(qID, rID);
         LITW.study.params.questionsNorms[qID] = rID;
-        if(Object.keys(LITW.study.params.questionsNorms).length === LITW.study.params.numNormQuestions) {
+        if(Object.keys(LITW.study.params.questionsNorms).length % LITW.study.params.numNormQuestions === 0) {
             document.getElementById('submit').classList.remove('invisible');
         }
     }

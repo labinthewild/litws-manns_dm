@@ -19,7 +19,7 @@ var irbTemplate = require("../templates/irb.html");
 var demographicsTemplate = require("../templates/demographics.html");
 var question1Template = require("./templates/decision-making.html");
 var loadingTemplate = require("../templates/loading.html");
-var resultsTemplate = require("../templates/results.html");
+var resultsTemplate = require("./templates/results.html");
 var resultsFooter = require("../templates/results-footer.html");
 var commentsTemplate = require("../templates/comments.html");
 require("../js/litw/jspsych-display-info");
@@ -130,7 +130,7 @@ module.exports = (function(exports) {
 
 	function getExpectationQuestions() {
 		let numQ = 7;
-		let numA = 6;
+		let numA = 3;
 		let quest = {
 			questions: [],
 			responses: []
@@ -139,7 +139,7 @@ module.exports = (function(exports) {
 		while(counter <= Math.max(numQ, numA)) {
 			if (counter <= numQ) {
 				quest.questions.push({
-					id: counter,
+					id: params.questionOrderArray[counter - 1],
 					text: $.i18n(`study-mann-q${params.questionOrderArray[counter - 1]}`)
 				})
 			}
@@ -175,8 +175,36 @@ module.exports = (function(exports) {
 	}
 
 	function calculateResults() {
-		//TODO: Nothing to calculate
-		let results_data = {}
+
+    let avgVigilance = 0;
+    let avgHypervigilance = 0;
+    let avgBuckpassing = 0;
+    let avgProcrastination = 0;
+    let avgDmSelfEsteem = 0;
+
+    for (const key in params.questionsNorms) {
+    	if (key <= 6) {
+      	avgVigilance += (params.questionsNorms[key] - 1);
+      } else if (key <= 12) {
+				avgBuckpassing += (params.questionsNorms[key] - 1);
+			} else if (key <= 17) {
+				avgHypervigilance += (params.questionsNorms[key] - 1);
+			} else if (key <= 22) {
+				avgProcrastination += (params.questionsNorms[key] - 1);
+			} else {
+				avgDmSelfEsteem += (params.questionsNorms[key] - 1);
+			}
+    }
+		// We don't want the averages to be the data sent to the database. Normalized data should be sent to the database.
+
+		let results_data = {
+			"vigilance": avgVigilance,
+			"hypervigilance": avgHypervigilance,
+			"buckpassing": avgBuckpassing,
+			"procrastination": avgProcrastination,
+			"selfEsteem": avgDmSelfEsteem
+		}
+		LITW.data.submitStudyData(results_data);
 		showResults(results_data, true)
 	}
 
