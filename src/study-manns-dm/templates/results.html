@@ -27,8 +27,15 @@
             <canvas id="dm-style-graph"></canvas>
         </div>
         <div id="dm-style-text">
-            <p  data-i18n="litw-results-intro-v"></p>
+            <h4 class="text-center" style="margin-top: 100px; margin-bottom: 30px;">{{ data.message }}</h4>
         </div>
+    </div>
+    <div id="results-explain" class="container border border-3 p-4" style="width: 90%">
+        <p data-i18n="litw-results-vigilance-explanation"></p>
+        <p data-i18n="litw-results-hypervigilance-explanation"></p>
+        <p data-i18n="litw-results-buckpassing-explanation"></p>
+        <p data-i18n="litw-results-procrastination-explanation"></p>
+        <p data-i18n="litw-results-paper-info"></p>
     </div>
 </div>
 
@@ -37,69 +44,65 @@
 <div id="results-footer"></div>
 
 <script type="text/javascript">
+    let participant_vigilance = document.getElementById('participant_vigilance').dataset.score;
+    let participant_hypervigilance = document.getElementById('participant_hypervigilance').dataset.score;
+    let participant_buckpassing = document.getElementById('participant_buckpassing').dataset.score;
+    let participant_procrastination = document.getElementById('participant_procrastination').dataset.score;
+    let participant_d_selfesteem = document.getElementById('participant_d_selfesteem').dataset.score;
 
-function renderChart() {
-
-let participant_vigilance = document.getElementById('participant_vigilance').dataset.score;
-let participant_hypervigilance = document.getElementById('participant_hypervigilance').dataset.score;
-let participant_buckpassing = document.getElementById('participant_buckpassing').dataset.score;
-let participant_procrastination = document.getElementById('participant_procrastination').dataset.score;
-let participant_d_selfesteem = document.getElementById('participant_d_selfesteem').dataset.score;
-
-let ctx = document.getElementById('dm-style-graph').getContext('2d');
-
-const chartOptions = {
-    responsive: true, // Make the chart responsive
-    maintainAspectRatio: false, // Allow aspect ratio to be modified
-    scales: {
-        r: {
-            axis: 'r',
-            max: 12,
-            beginAtZero: true,
-            angleLines: {
-                display: true,
-                color: 'rgba(22, 138, 173,0.1)'
+    function renderChart() {
+        let ctx = document.getElementById('dm-style-graph').getContext('2d');
+        const chartOptions = {
+            responsive: true, // Make the chart responsive
+            maintainAspectRatio: false, // Allow aspect ratio to be modified
+            scales: {
+                r: {
+                    axis: 'r',
+                    max: 12,
+                    beginAtZero: true,
+                    angleLines: {
+                        display: true,
+                        color: 'rgba(22, 138, 173,0.1)'
+                    },
+                    pointLabels: {
+                        font: {
+                            size: 16 // Adjust the font size for the axis labels
+                        }
+                    }
+                }
             },
-            pointLabels: {
-                font: {
-                    size: 16 // Adjust the font size for the axis labels
+            elements: {
+                line: {
+                    borderWidth: 3
                 }
             }
-        }
-    },
-    elements: {
-        line: {
-            borderWidth: 3
-        }
+        };
+
+        let myChart = new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: ['Vigilance', 'Hypervigilance', 'Buckpassing', 'Procrastination', 'Decision Self-Esteem'],
+                datasets: [
+                    {
+                        label: 'Your Decision-Making Style',
+                        data: [participant_vigilance, participant_hypervigilance, participant_buckpassing, participant_procrastination, participant_d_selfesteem]
+                    },
+                    {
+                        label: 'Western Decision-Making Style',
+                        data: [9.42, 4.3, 4.33, 3.25, 8.44]
+                    },
+                    {
+                        label: 'East Asian Decision-Making Style',
+                        data: [9.39, 4.92, 9.39, 4.49, 7.00]
+                    }
+                ]
+            },
+            options: chartOptions
+        });
     }
-};
 
-let myChart = new Chart(ctx, {
-    type: 'radar',
-    data: {
-        labels: ['Vigilance', 'Hypervigilance', 'Buckpassing', 'Procrastination', 'Decision Self-Esteem'],
-        datasets: [
-            {
-                label: 'Your Decision-Making Style',
-                data: [participant_vigilance, participant_hypervigilance, participant_buckpassing, participant_procrastination, participant_d_selfesteem]
-            },
-            {
-                label: 'Western Decision-Making Style',
-                data: [9.42, 4.3, 4.33, 3.25, 8.44]
-            },
-            {
-                label: 'East Asian Decision-Making Style',
-                data: [9.39, 4.92, 9.39, 4.49, 7.00]
-            }
-        ]
-    },
-    options: chartOptions
-});
-}
-
-
-$(document).ready(function () {
-    renderChart();
-});
+    $(document).ready(function () {
+        renderChart();
+    });
 
 </script>

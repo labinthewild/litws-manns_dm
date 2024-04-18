@@ -175,37 +175,49 @@ module.exports = (function(exports) {
 	}
 
 	function calculateResults() {
-
-    let avgVigilance = 0;
-    let avgHypervigilance = 0;
-    let avgBuckpassing = 0;
-    let avgProcrastination = 0;
-    let avgDmSelfEsteem = 0;
+		let results_data = {};
+    let vigilance = 0;
+    let hypervigilance = 0;
+    let buckpassing = 0;
+    let procrastination = 0;
+    let dmSelfEsteem = 0;
 
     for (const key in params.questionsNorms) {
     	if (key <= 6) {
-      	avgVigilance += (params.questionsNorms[key] - 1);
+      	vigilance += (params.questionsNorms[key] - 1);
       } else if (key <= 12) {
-				avgBuckpassing += (params.questionsNorms[key] - 1);
+				buckpassing += (params.questionsNorms[key] - 1);
 			} else if (key <= 17) {
-				avgHypervigilance += (params.questionsNorms[key] - 1);
+				hypervigilance += (params.questionsNorms[key] - 1);
 			} else if (key <= 22) {
-				avgProcrastination += (params.questionsNorms[key] - 1);
+				procrastination += (params.questionsNorms[key] - 1);
 			} else {
-				avgDmSelfEsteem += (params.questionsNorms[key] - 1);
+				dmSelfEsteem += (params.questionsNorms[key] - 1);
 			}
     }
-		// We don't want the averages to be the data sent to the database. Normalized data should be sent to the database.
-
-		let results_data = {
-			"vigilance": avgVigilance,
-			"hypervigilance": avgHypervigilance,
-			"buckpassing": avgBuckpassing,
-			"procrastination": avgProcrastination,
-			"selfEsteem": avgDmSelfEsteem
+   	results_data = {
+			"vigilance": vigilance,
+			"hypervigilance": hypervigilance,
+			"buckpassing": buckpassing,
+			"procrastination": procrastination,
+			"selfEsteem": dmSelfEsteem
 		}
 		LITW.data.submitStudyData(results_data);
+		chooseMessage(results_data);
 		showResults(results_data, true)
+	}
+
+	function chooseMessage(results_data) {
+		let num = Math.max(results_data.vigilance, results_data.hypervigilance, results_data.buckpassing, results_data.procrastination);
+		if(num == results_data.vigilance) {
+			results_data.message = $.i18n('litw-results-intro-v');
+		} else if (num == results_data.hypervigilance) {
+			results_data.message = $.i18n('litw-results-intro-hv');
+		} else if(num == results_data.buckpassing) {
+			results_data.message = $.i18n('litw-results-intro-bp');
+		} else {
+			results_data.message = $.i18n('litw-results-intro-p');
+		}
 	}
 
 	function showResults(results = {}, showFooter = false) {
