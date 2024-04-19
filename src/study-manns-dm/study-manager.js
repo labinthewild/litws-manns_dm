@@ -29,15 +29,15 @@ require("../js/litw/jspsych-display-slide");
 module.exports = (function(exports) {
 	var timeline = [],
 	params = {
-		questionsNorms: {},
+		questionsAndResponses: {},
 		progressBarWidth: -25,
-		numNormQuestions: 0,
 		questionOrderArray: [],
+		numQuestions: 0,
 		study_id: "TO_BE_ADDED_IF_USING_LITW_INFRA",
 		study_recommendation: [],
 		preLoad: ["../img/btn-next.png","../img/btn-next-active.png","../img/ajax-loader.gif"],
 		slides: {
-			/*INTRODUCTION: {
+			INTRODUCTION: {
 				name: "introduction",
 				type: "display-slide",
 				template: introTemplate,
@@ -60,36 +60,36 @@ module.exports = (function(exports) {
 					var dem_data = $('#demographicsForm').alpaca().getValue();
 					LITW.data.submitDemographics(dem_data);
 				}
-			},*/
+			},
 			QUESTION1: {
-				name: "question_norms",
+				name: "questionnaire",
 				type: "display-slide",
 				template: question1Template,
-				template_data: getExpectationQuestions,
+				template_data: getStudyQuestions,
 				display_element: $("#question1"),
 				display_next_button: false,
 			},
 			QUESTION2: {
-				name: "question_norms",
+				name: "questionnaire",
 				type: "display-slide",
 				template: question1Template,
-				template_data: getExpectationQuestions,
+				template_data: getStudyQuestions,
 				display_element: $("#question1"),
 				display_next_button: false,
 			},
 			QUESTION3: {
-				name: "question_norms",
+				name: "questionnaire",
 				type: "display-slide",
 				template: question1Template,
-				template_data: getExpectationQuestions,
+				template_data: getStudyQuestions,
 				display_element: $("#question1"),
 				display_next_button: false,
 			},
 			QUESTION4: {
-				name: "question_norms",
+				name: "questionnaire",
 				type: "display-slide",
 				template: question1Template,
-				template_data: getExpectationQuestions,
+				template_data: getStudyQuestions,
 				display_element: $("#question1"),
 				display_next_button: false,
 			},
@@ -118,9 +118,9 @@ module.exports = (function(exports) {
 
 	function configureStudy() {
 		params.questionOrderArray = randomizeArray(createArray());
-		/*timeline.push(params.slides.INTRODUCTION);
+		timeline.push(params.slides.INTRODUCTION);
 		timeline.push(params.slides.INFORMED_CONSENT);
-		timeline.push(params.slides.DEMOGRAPHICS);*/
+		timeline.push(params.slides.DEMOGRAPHICS);
 		timeline.push(params.slides.QUESTION1);
 		timeline.push(params.slides.QUESTION2);
 		timeline.push(params.slides.QUESTION3);
@@ -129,14 +129,14 @@ module.exports = (function(exports) {
 		timeline.push(params.slides.RESULTS);
 	}
 
-	function getExpectationQuestions() {
+	function getStudyQuestions() {
+		let counter = 1;
 		let numQ = 7;
 		let numA = 3;
 		let quest = {
 			questions: [],
 			responses: []
 		}
-		let counter = 1;
 		while(counter <= Math.max(numQ, numA)) {
 			if (counter <= numQ) {
 				quest.questions.push({
@@ -152,7 +152,7 @@ module.exports = (function(exports) {
 			}
 			counter++;
 		}
-		params.progressBarWidth = params.progressBarWidth + 25;
+		params.progressBarWidth += 25;
 		params.questionOrderArray.splice(0, 7);
 		return quest;
 	}
@@ -182,18 +182,17 @@ module.exports = (function(exports) {
     let buckpassing = 0;
     let procrastination = 0;
     let dmSelfEsteem = 0;
-
-    for (const key in params.questionsNorms) {
+    for (const key in params.questionsAndResponses) {
     	if (key <= 6) {
-      	vigilance += (params.questionsNorms[key] - 1);
+      	vigilance += (params.questionsAndResponses[key] - 1);
       } else if (key <= 12) {
-				buckpassing += (params.questionsNorms[key] - 1);
+				buckpassing += (params.questionsAndResponses[key] - 1);
 			} else if (key <= 17) {
-				hypervigilance += (params.questionsNorms[key] - 1);
+				hypervigilance += (params.questionsAndResponses[key] - 1);
 			} else if (key <= 22) {
-				procrastination += (params.questionsNorms[key] - 1);
+				procrastination += (params.questionsAndResponses[key] - 1);
 			} else {
-				dmSelfEsteem += (params.questionsNorms[key] - 1);
+				dmSelfEsteem += (params.questionsAndResponses[key] - 1);
 			}
     }
    	results_data = {
@@ -203,7 +202,7 @@ module.exports = (function(exports) {
 			"procrastination": procrastination,
 			"selfEsteem": dmSelfEsteem
 		}
-		LITW.data.submitStudyData({results_data : results_data});
+		LITW.data.submitStudyData({results_data1 : results_data});
 		chooseMessage(results_data);
 		showResults(results_data, true)
 	}
