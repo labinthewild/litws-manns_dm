@@ -117,6 +117,7 @@ module.exports = (function(exports) {
 	};
 
 	function configureStudy() {
+		params.questionOrderArray = randomizeArray(createArray());
 		/*timeline.push(params.slides.INTRODUCTION);
 		timeline.push(params.slides.INFORMED_CONSENT);
 		timeline.push(params.slides.DEMOGRAPHICS);*/
@@ -202,7 +203,7 @@ module.exports = (function(exports) {
 			"procrastination": procrastination,
 			"selfEsteem": dmSelfEsteem
 		}
-		LITW.data.submitStudyData(results_data);
+		LITW.data.submitStudyData({results_data : results_data});
 		chooseMessage(results_data);
 		showResults(results_data, true)
 	}
@@ -254,7 +255,6 @@ module.exports = (function(exports) {
 	}
 
 	function startStudy() {
-		params.questionOrderArray = randomizeArray(createArray());
 		// generate unique participant id and geolocate participant
 		LITW.data.initialize();
 		// save URL params

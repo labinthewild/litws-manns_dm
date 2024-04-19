@@ -101,7 +101,7 @@
   "litw-results-intro-bp": "Your decision making style appears to lean towards buckpassing.",
   "litw-results-vigilance-explanation": "Vigilance: A vigilant decision maker often takes time to think carefully before making choices, they do not rush into things without thinking, instead, they pay attention to details and consider the possible outcomes.",
   "litw-results-hypervigilance-explanation": "Hypervigilance: The decision maker who is hyper-vigilant or panicky tends to search urgently for solutions when confronted with dilemmas. They may act impulsively, grabbing quick fixes that seem to offer relief from conflicts.",
-  "litw-results-buckpassing-explanation": "Buckpassing: They often evade responsibility by shifting decisions to others, resulting in delayed actions and reduced initiative.",
+  "litw-results-buckpassing-explanation": "Buckpassing: This decision maker often evades responsibility by shifting decisions to others, resulting in delayed actions and reduced initiative.",
   "litw-results-procrastination-explanation": "Procrastination: This decision maker attempts to escape difficult decisions by procrastinating or constructing wishful rationalizations to justify the least objectionable alternative.",
   "litw-results-paper-info": "Decision-making styles refer to the individual's preferred and consistent approach to making choices and decisions. In this study, the result of your decision making style is measured using the Melbourne Decision Making Questionnaire developed by a psychologist Leon Mann. The questionnaire measures four different decision-making styles: vigilance, buck-passing, hypervigilance, and procrastination.",
   "litw-more-title": "If you enjoyed this study, there's more!",
@@ -142,8 +142,8 @@
   "study-mann-q26": "I feel so discouraged that I give up trying to make decisions.",
   "study-mann-q27": "The decisions I make turn out well.",
   "study-mann-q28": "It is easy for other people to convince me that their decision rather than mine is the correct one.",
-  "study-mann-r1": "0 (Not True For Me)",
-  "study-mann-r2": "1 (Sometimes True)",
-  "study-mann-r3": "2 (True For Me)",
+  "study-mann-r1": "Not True For Me",
+  "study-mann-r2": "Sometimes True",
+  "study-mann-r3": "True For Me",
   "study-mann-save": "Submit"
 }
