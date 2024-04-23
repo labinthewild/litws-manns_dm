@@ -14,7 +14,7 @@ window.$ = window.jQuery = require("jquery");
 window.bootstrap = require("bootstrap");
 require("jquery-ui-bundle");
 var _ = require('lodash');
-var introTemplate = require("../templates/introduction.html");
+var introTemplate = require("./templates/introduction.html");
 var irbTemplate = require("../templates/irb.html");
 var demographicsTemplate = require("../templates/demographics.html");
 var question1Template = require("./templates/decision-making.html");
@@ -33,7 +33,7 @@ module.exports = (function(exports) {
 		progressBarWidth: -25,
 		questionOrderArray: [],
 		numQuestions: 0,
-		study_id: "TO_BE_ADDED_IF_USING_LITW_INFRA",
+		study_id: "fa42e461-c85f-4c23-8280-37054dafdc5d",
 		study_recommendation: [],
 		preLoad: ["../img/btn-next.png","../img/btn-next-active.png","../img/ajax-loader.gif"],
 		slides: {
