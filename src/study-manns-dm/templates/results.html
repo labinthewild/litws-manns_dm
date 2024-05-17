@@ -22,13 +22,14 @@
     <div id="participant_d_selfesteem" data-score="{{ data.selfEsteem }}"></div>
 </div>
 
-<div class="results-container">
+<div class="results-container" style="display: grid;">
     <div class="decision-making-survey-result-container">
         <div class="dm-style-graph-container" style="display: flex; justify-content: center;">
             <canvas id="dm-style-graph"  style="max-height: 500px; margin-bottom: 30px"></canvas>
         </div>
     </div>
     <p class="text-center" style="margin-top: 30px;" data-i18n="litw-results-paper-info1"></p>
+    <a  style="max-width: 900px; text-align: center; margin: auto; margin-bottom: 30px;" data-i18n="litw-results-paper-citation" href="https://doi.org/10.1080/002075998400213"></a>
     <div id="results-explain" class="container border border-3 p-4" style="width: 90%;">
         <h5 class="text-center bolded-blue" style="margin-bottom: 30px;" data-i18n="litw-results-box-title"></h5>
         <p data-i18n="litw-results-paper-info2"></p>
@@ -36,6 +37,7 @@
         <p data-i18n="litw-results-hypervigilance-explanation"></p>
         <p data-i18n="litw-results-buckpassing-explanation"></p>
         <p data-i18n="litw-results-procrastination-explanation"></p>
+        <p data-i18n="litw-results-dmselfesteem-explanation"></p>
     </div>
 </div>
 
@@ -91,15 +93,24 @@
                 datasets: [
                     {
                         label: 'Your decision-making style',
-                        data: [participant_vigilance, participant_hypervigilance, participant_buckpassing, participant_procrastination, participant_d_selfesteem]
+                        data: [participant_vigilance, participant_hypervigilance, participant_buckpassing, participant_procrastination, participant_d_selfesteem],
+                        backgroundColor: [
+                            'rgb(188, 80, 144, 0.75)'
+                        ],
                     },
                     {
                         label: 'Avg decision-making style of Western participants*',
-                        data: [9.42, 4.3, 4.33, 3.25, 8.44]
+                        data: [9.42, 4.3, 4.33, 3.25, 8.44],
+                        backgroundColor: [
+                            'rgb(255, 166, 0, 0.67)'
+                        ],
                     },
                     {
                         label: 'Avg decision-making style of Eastern participants*',
-                        data: [9.39, 4.92, 9.39, 4.49, 7.00]
+                        data: [9.39, 4.92, 9.39, 4.49, 7.00],
+                        backgroundColor: [
+                            'rgb(0, 63, 92, 0.67)'
+                        ],
                     }
                 ]
             },
