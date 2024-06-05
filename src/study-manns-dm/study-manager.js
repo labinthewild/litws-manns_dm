@@ -166,13 +166,7 @@ module.exports = (function(exports) {
 	}
 
 	function randomizeArray(array) {
-    for (let index = array.length - 1; index > 0; index--) {
-        let index2 = Math.floor(Math.random() * (index + 1));
-        let temp = array[index];
-        array[index] = array[index2];
-        array[index2] = temp;
-    }
-		return array;
+		return array.sort(() => (Math.random() > 0.5) ? 1 : -1);
 	}
 
 	function calculateResults() {
