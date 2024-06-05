@@ -64,11 +64,11 @@
     }
 
     function finishQuestions () {
-        let quest = {
-                responses: LITW.study.params.questionsAndResponses
-            };
+        let studyResponses = {
+            responses: LITW.study.params.questionsAndResponses
+        };
         LITW.data.submitStudyData({
-            quest: quest
+            studyResponses: studyResponses
         });
         document.getElementById('btn-next-page').click()
     }

@@ -37,7 +37,7 @@ module.exports = (function(exports) {
 		study_recommendation: [],
 		preLoad: ["../img/btn-next.png","../img/btn-next-active.png","../img/ajax-loader.gif"],
 		slides: {
-			/*INTRODUCTION: {
+			INTRODUCTION: {
 				name: "introduction",
 				type: "display-slide",
 				template: introTemplate,
@@ -60,7 +60,7 @@ module.exports = (function(exports) {
 					var dem_data = $('#demographicsForm').alpaca().getValue();
 					LITW.data.submitDemographics(dem_data);
 				}
-			},*/
+			},
 			QUESTION1: {
 				name: "questionnaire",
 				type: "display-slide",
@@ -118,9 +118,9 @@ module.exports = (function(exports) {
 
 	function configureStudy() {
 		params.questionOrderArray = randomizeArray(createArray());
-		/*timeline.push(params.slides.INTRODUCTION);
+		timeline.push(params.slides.INTRODUCTION);
 		timeline.push(params.slides.INFORMED_CONSENT);
-		timeline.push(params.slides.DEMOGRAPHICS);*/
+		timeline.push(params.slides.DEMOGRAPHICS);
 		timeline.push(params.slides.QUESTION1);
 		timeline.push(params.slides.QUESTION2);
 		timeline.push(params.slides.QUESTION3);
