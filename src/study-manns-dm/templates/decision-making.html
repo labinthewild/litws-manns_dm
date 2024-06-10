@@ -1,4 +1,4 @@
-<h6 class="text-center bolded-blue">Study Completion</h6>
+<h6 class="text-center bolded-blue" data-i18n="litw-progress-bar-label"></h6>
 <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 60px;">
     <p class="bolded-blue" style="margin-right: 10px; margin-bottom: 0px;">0%</p>
     <div id="progress-bar" style="width: 35%; background-color: rgba(232,232,235,255); border-radius: 50px; ">
@@ -64,11 +64,11 @@
     }
 
     function finishQuestions () {
-        let quest = {
-                responses: LITW.study.params.questionsAndResponses
-            };
+        let studyResponses = {
+            responses: LITW.study.params.questionsAndResponses
+        };
         LITW.data.submitStudyData({
-            quest: quest
+            studyResponses: studyResponses
         });
         document.getElementById('btn-next-page').click()
     }

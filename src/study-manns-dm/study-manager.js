@@ -16,7 +16,7 @@ require("jquery-ui-bundle");
 var _ = require('lodash');
 var introTemplate = require("./templates/introduction.html");
 var irbTemplate = require("../templates/irb.html");
-var demographicsTemplate = require("../templates/demographics.html");
+var demographicsTemplate = require("./templates/demographics.html");
 var question1Template = require("./templates/decision-making.html");
 var loadingTemplate = require("../templates/loading.html");
 var resultsTemplate = require("./templates/results.html");
@@ -119,8 +119,8 @@ module.exports = (function(exports) {
 	function configureStudy() {
 		params.questionOrderArray = randomizeArray(createArray());
 		timeline.push(params.slides.INTRODUCTION);
-		timeline.push(params.slides.INFORMED_CONSENT);
-		timeline.push(params.slides.DEMOGRAPHICS);
+		//timeline.push(params.slides.INFORMED_CONSENT);
+		//timeline.push(params.slides.DEMOGRAPHICS);
 		timeline.push(params.slides.QUESTION1);
 		timeline.push(params.slides.QUESTION2);
 		timeline.push(params.slides.QUESTION3);
@@ -166,13 +166,7 @@ module.exports = (function(exports) {
 	}
 
 	function randomizeArray(array) {
-    for (let index = array.length - 1; index > 0; index--) {
-        let index2 = Math.floor(Math.random() * (index + 1));
-        let temp = array[index];
-        array[index] = array[index2];
-        array[index2] = temp;
-    }
-		return array;
+		return array.sort(() => (Math.random() > 0.5) ? 1 : -1);
 	}
 
 	function calculateResults() {
