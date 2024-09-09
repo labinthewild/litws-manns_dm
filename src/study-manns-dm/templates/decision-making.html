@@ -1,3 +1,7 @@
+{{#if progress}}
+    {{>prog value=progress.value}}
+{{/if}}
+
 <h6 class="text-center bolded-blue" data-i18n="litw-progress-bar-label"></h6>
 <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 60px;">
     <p class="bolded-blue" style="margin-right: 10px; margin-bottom: 0px;">0%</p>
@@ -17,8 +21,8 @@
     {{#each questions}}
         <div class="row mt-4">
             <h6 id="question-{{ this.id }}" data-type="question" class="bolded-blue">{{ this.text }}</h6>
-            <div class="col d-flex justify-content-center">
-                <div class="btn-group me-2" role="group" aria-label="First group">
+            <div class="col justify-content-center litw-button-group-container">
+                <div class="btn-group me-2 litw-button-group" role="group" aria-label="First group">
     {{#each ../responses}}
                     <button type="button" data-qid="{{ ../this.id }}" data-rid="{{ this.id }}" class="btn btn-outline-primary" onclick="respondQuestion({{ ../this.id }}, {{ this.id }})">
                         {{ this.text }}

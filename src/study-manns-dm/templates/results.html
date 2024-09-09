@@ -1,8 +1,9 @@
-<!-- Template for the results page -->
 <h3 class="bolded-blue" style="text-align: center">{{ data.message }}</h3>
-<br>
-<p class="text-center" data-i18n="litw-results-graph-info"></p>
-<br>
+<div id="participant_vigilance" data-score="{{ data.vigilance }}"></div>
+<div id="participant_hypervigilance" data-score="{{ data.hypervigilance }}"></div>
+<div id="participant_buckpassing" data-score="{{ data.buckpassing }}"></div>
+<div id="participant_procrastination" data-score="{{ data.procrastination }}"></div>
+<div id="participant_d_selfesteem" data-score="{{ data.selfEsteem }}"></div>
 
 {{#if data.code}}
 <h5 style="text-align: center">
@@ -13,14 +14,8 @@
 {{/if}}
 
 <br>
-
-<div id="results-main" class="container center-content">
-    <div id="participant_vigilance" data-score="{{ data.vigilance }}"></div>
-    <div id="participant_hypervigilance" data-score="{{ data.hypervigilance }}"></div>
-    <div id="participant_buckpassing" data-score="{{ data.buckpassing }}"></div>
-    <div id="participant_procrastination" data-score="{{ data.procrastination }}"></div>
-    <div id="participant_d_selfesteem" data-score="{{ data.selfEsteem }}"></div>
-</div>
+<p class="text-center" data-i18n="litw-results-graph-info"></p>
+<br>
 
 <div class="results-container" style="display: grid;">
     <div class="decision-making-survey-result-container">
@@ -28,20 +23,42 @@
             <canvas id="dm-style-graph"  style="max-height: 500px; margin-bottom: 30px"></canvas>
         </div>
     </div>
-    <p class="text-center" style="margin-top: 30px;" data-i18n="litw-results-paper-info1"></p>
-    <a  style="max-width: 900px; text-align: center; margin: auto; margin-bottom: 30px;" data-i18n="litw-results-paper-citation" href="https://doi.org/10.1080/002075998400213"></a>
-    <div id="results-explain" class="container border border-3 p-4" style="width: 90%;">
-        <h5 class="text-center bolded-blue" style="margin-bottom: 30px;" data-i18n="litw-results-box-title"></h5>
+</div>
+
+<div class="accordion pb-4" id="accordionPanelsStayOpenExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+              aria-controls="panelsStayOpen-collapseTwo" data-i18n="litw-results-box-title">
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+      <div class="accordion-body">
         <p data-i18n="litw-results-paper-info2"></p>
         <p data-i18n="litw-results-vigilance-explanation"></p>
         <p data-i18n="litw-results-hypervigilance-explanation"></p>
         <p data-i18n="litw-results-buckpassing-explanation"></p>
         <p data-i18n="litw-results-procrastination-explanation"></p>
         <p data-i18n="litw-results-dmselfesteem-explanation"></p>
+      </div>
     </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+              aria-controls="panelsStayOpen-collapseThree" data-i18n="litw-results-ref-title">
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+      <div class="accordion-body">
+        <p class="text-center" style="margin-top: 30px;" data-i18n="litw-results-paper-info1"></p>
+        <a  style="max-width: 900px; text-align: center; margin: auto; margin-bottom: 30px;" data-i18n="litw-results-paper-citation" href="https://doi.org/10.1080/002075998400213"></a>
+      </div>
+    </div>
+  </div>
 </div>
-
-<br>
 
 <div id="results-footer"></div>
 
