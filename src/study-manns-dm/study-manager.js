@@ -71,11 +71,14 @@ module.exports = (function(exports) {
 			},
 			DEMOGRAPHICS: {
 				type: "display-slide",
-				template: demographicsTemplate,
+				template_data: {
+					local_data_id: 'LITW_DEMOGRAPHICS'
+				},
 				display_element: $("#demographics"),
 				name: "demographics",
 				finish: function(){
-					var dem_data = $('#demographicsForm').alpaca().getValue();
+					let dem_data = $('#demographicsForm').alpaca().getValue();
+					LITW.data.addToLocal(this.template_data.local_data_id, dem_data);
 					LITW.data.submitDemographics(dem_data);
 				}
 			},
