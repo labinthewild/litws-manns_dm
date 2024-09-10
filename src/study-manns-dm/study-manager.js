@@ -45,8 +45,13 @@ let commentsTemplate = Handlebars.compile(commentsHTML);
 
 //TODO: document "params.study_id" when updating the docs/7-ManageData!!!
 module.exports = (function(exports) {
-	var timeline = [],
-	params = {
+	const study_times= {
+		SHORT: 5,
+		MEDIUM: 10,
+		LONG: 15,
+	};
+	let timeline = [];
+	let params = {
 		questionsAndResponses: {},
 		progressBarWidth: 0,
 		questionOrderArray: [],
@@ -71,11 +76,12 @@ module.exports = (function(exports) {
 			},
 			DEMOGRAPHICS: {
 				type: "display-slide",
+				display_element: $("#demographics"),
+				name: "demographics",
+				template: demographicsTemplate,
 				template_data: {
 					local_data_id: 'LITW_DEMOGRAPHICS'
 				},
-				display_element: $("#demographics"),
-				name: "demographics",
 				finish: function(){
 					let dem_data = $('#demographicsForm').alpaca().getValue();
 					LITW.data.addToLocal(this.template_data.local_data_id, dem_data);
