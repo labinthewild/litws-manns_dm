@@ -1,10 +1,10 @@
 {
-  "name": "litws-manns-dm",
-  "version": "2.0.0",
+  "name": "litw-study-cats",
+  "version": "2.0.1",
   "author": "The LabintheWild Team",
   "license": "MIT",
-  "homepage": "https://github.com/labinthewild/litws-manns_dm",
-  "description": "Implementation of the Mann's Decision Making Questionnaire.",
+  "homepage": "https://github.com/labinthewild/LITW-study-templates",
+  "description": "This is the first official LabintheWild Template: Learn about your cat preferences.",
   "dependencies": {
     "alpaca": "^1.5.27",
     "bootstrap": "^5.3",
@@ -25,10 +25,10 @@
     "url": "git@github.com:labinthewild/litws-manns_dm.git"
   },
   "devDependencies": {
-    "handlebars": "^4.7.8",
-    "webpack": "^5.94.0",
-    "webpack-dev-server": "^5.1.0",
-    "html-loader": "^5.1.0",
-    "webpack-cli": "^5.1.4"
+    "handlebars": "^4.7.7",
+    "webpack": "^5.77.0",
+    "webpack-dev-server": "^4.15.0",
+    "html-loader": "^5.0.0",
+    "webpack-cli": "^5.1.3"
   }
 }
