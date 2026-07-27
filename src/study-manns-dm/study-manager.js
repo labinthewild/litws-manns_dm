@@ -32,6 +32,7 @@ import loadingHTML from "../templates/loading.html";
 import resultsHTML from "./templates/results.html";
 import resultsFooterHTML from "../templates/results-footer.html";
 import commentsHTML from "../templates/comments.html";
+import interventionHTML from "./templates/intervention.html";
 require("../js/litw/jspsych-display-slide");
 //CONVERT HTML INTO TEMPLATES
 let introTemplate = Handlebars.compile(introHTML);
@@ -42,6 +43,7 @@ let loadingTemplate = Handlebars.compile(loadingHTML);
 let resultsTemplate = Handlebars.compile(resultsHTML);
 let resultsFooterTemplate = Handlebars.compile(resultsFooterHTML);
 let commentsTemplate = Handlebars.compile(commentsHTML);
+let interventionTemplate = Handlebars.compile(interventionHTML);
 
 //TODO: document "params.study_id" when updating the docs/7-ManageData!!!
 module.exports = (function(exports) {
@@ -87,6 +89,13 @@ module.exports = (function(exports) {
 					LITW.data.addToLocal(this.template_data.local_data_id, dem_data);
 					LITW.data.submitDemographics(dem_data);
 				}
+			},
+			INTERVENTION: {
+				type: "display-slide",
+				display_element: $("#intervention"),
+				name: "intervention",
+				template: interventionTemplate,
+				display_next_button: true,
 			},
 			QUESTION1: {
 				name: "questionnaire",
@@ -148,6 +157,15 @@ module.exports = (function(exports) {
 		timeline.push(params.slides.INTRODUCTION);
 		timeline.push(params.slides.INFORMED_CONSENT);
 		timeline.push(params.slides.DEMOGRAPHICS);
+		const INTERVENTION_IDS = ["UNIQUE", "RESEARCH", "NEUTRAL"];
+		params.intervention_chosen = INTERVENTION_IDS[Math.floor(Math.random() * INTERVENTION_IDS.length)];
+		params.slides.INTERVENTION.template_data = () => {
+			return {
+				heading: $.i18n(`litw-study-intervention-${params.intervention_chosen}-heading`),
+				body: $.i18n(`litw-study-intervention-${params.intervention_chosen}-body`)
+			};
+		}
+		timeline.push(params.slides.INTERVENTION);
 		timeline.push(params.slides.QUESTION1);
 		timeline.push(params.slides.QUESTION2);
 		timeline.push(params.slides.QUESTION3);
@@ -277,6 +295,7 @@ module.exports = (function(exports) {
 	function startStudy() {
 		// generate unique participant id and geolocate participant
 		LITW.data.initialize();
+		LITW.data.submitStudyConfig({ intervention: params.intervention_chosen });
 		// save URL params
 		params.URL = LITW.utils.getParamsURL();
 		if( Object.keys(params.URL).length > 0 ) {
