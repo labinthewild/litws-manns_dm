@@ -168,15 +168,17 @@ module.exports = (function(exports) {
 		timeline.push(config.slides.INTRODUCTION);
 		timeline.push(config.slides.INFORMED_CONSENT);
 		timeline.push(config.slides.DEMOGRAPHICS);
-		const INTERVENTION_IDS = ["UNIQUE", "RESEARCH", "NEUTRAL"];
+		const INTERVENTION_IDS = ["NONE", "UNIQUE", "RESEARCH", "NEUTRAL"];
 		config.intervention_chosen = INTERVENTION_IDS[Math.floor(Math.random() * INTERVENTION_IDS.length)];
-		config.slides.INTERVENTION.template_data = () => {
-			return {
-				heading: $.i18n(`litw-study-intervention-${config.intervention_chosen}-heading`),
-				body: $.i18n(`litw-study-intervention-${config.intervention_chosen}-body`)
-			};
-		}
-		timeline.push(config.slides.INTERVENTION);
+    if(config.intervention_chosen !== "NONE") {
+      config.slides.INTERVENTION.template_data = () => {
+        return {
+          heading: $.i18n(`litw-study-intervention-${config.intervention_chosen}-heading`),
+          body: $.i18n(`litw-study-intervention-${config.intervention_chosen}-body`)
+        };
+      }
+      timeline.push(config.slides.INTERVENTION);
+    }
 		timeline.push(config.slides.QUESTION1);
 		timeline.push(config.slides.QUESTION2);
 		timeline.push(config.slides.QUESTION3);
